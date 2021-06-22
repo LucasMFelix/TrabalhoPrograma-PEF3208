@@ -1,8 +1,6 @@
-#include <iostream>
-#include <string>
 
 #include "Grafo.h"
-using namespace std;
+
 
 void addBarra(Grafo* estrutura) {
 	int opcao = -1;
@@ -15,7 +13,7 @@ void addBarra(Grafo* estrutura) {
              << "Digite o numero da opcao: ";
         cin >> opcao;
 
-        char nome[2];
+        char* nome[2];
         float comprimento;
         cout << "Digite o nome da barra (Por exemplo: AB, CD): ";
         cin >> nome;
@@ -29,19 +27,18 @@ void addBarra(Grafo* estrutura) {
 
             case 1: {
                 estrutura->adicionarAresta(nome, comprimento, 0);
+                cout << "Barra horizontal " << nome << " adicionada." << endl;
                 break;
             }
 
             case 2: {
                 estrutura->adicionarAresta(nome, comprimento, 1);
+                cout << "Barra vertical " << nome << " adicionada." << endl;
                 break;
             }
 
             case 3: {
-                float inclinacao;
-                cout << "Digite o angulo de inclinacao com o eixo x em graus (Utilize ponto): ";
-                cin >> inclinacao;
-                estrutura->adicionarAresta(nome, comprimento, inclinacao);
+                cout << "Barras inclinadas estão indisponíveis nessa versão. Tente novamente." << endl;
                 break;
             }
 
