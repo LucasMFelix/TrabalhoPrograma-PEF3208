@@ -1,13 +1,14 @@
 #ifndef VERTICE_H
 #define VERTICE_H
-
+#include <iostream>
+#include <string>
 using namespace std;
 
 class Vertice {
 public:
 	Vertice(char nome);
 	virtual ~Vertice();
-	char getNome();
+	string getNome();
 	int getNumeroDeArestrasDeSaida();
 protected:
 	char nome;
