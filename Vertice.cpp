@@ -29,18 +29,19 @@ bool Vertice::addForca(double intensidade, char direcao)
     return false;
 }
 
-void Vertice::getForcas() {
+double* Vertice::getForcas() {
     return this->forcas;
 }
 
-bool Vertice::addIncognita(double intensidade, char direcao)
+bool Vertice::addIncognita(char direcao)
 {
-    if (direcao == 'i') {this->incognitas[0] = intensidade; return true;}
-    else if (direcao == 'j') {this->incognitas[1] = intensidade; return true;}
-    else if (direcao == 'k') {this->incognitas[2] = intensidade; return true;}
+    if (direcao == 'i') {this->incognitas[0] = 1; return true;}
+    else if (direcao == 'j') {this->incognitas[1] = 1; return true;}
+    else if (direcao == 'k') {this->incognitas[2] = 1; return true;}
     return false;
 }
 
-void Vertice::getIncognitas() {
+int* Vertice::getIncognitas() {
     return this->incognitas;
 }
+
