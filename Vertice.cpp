@@ -33,15 +33,14 @@ double* Vertice::getForcas() {
     return this->forcas;
 }
 
-bool Vertice::addIncognita(char direcao)
+bool Vertice::setIncognita(int booleana, char direcao)
 {
-    if (direcao == 'i') {this->incognitas[0] = 1; return true;}
-    else if (direcao == 'j') {this->incognitas[1] = 1; return true;}
-    else if (direcao == 'k') {this->incognitas[2] = 1; return true;}
+    if (direcao == 'i') {this->incognitas[0] = booleana; return true;}
+    else if (direcao == 'j') {this->incognitas[1] = booleana; return true;}
+    else if (direcao == 'k') {this->incognitas[2] = booleana; return true;}
     return false;
 }
 
 int* Vertice::getIncognitas() {
     return this->incognitas;
 }
-
