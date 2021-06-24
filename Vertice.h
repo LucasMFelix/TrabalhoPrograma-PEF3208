@@ -18,7 +18,7 @@ protected:
 	Vertice* adjacentes[MAXIMO_ARESTAS];
 	int quantidade = 0;
 	double forcas[MAXIMO_FORCAS];
-	double incognita[3]; // {Fx, Fy, Mz}
+	double incognitas[3]; // {Fx, Fy, Mz}
 };
 
 #endif // VERTICE_H
