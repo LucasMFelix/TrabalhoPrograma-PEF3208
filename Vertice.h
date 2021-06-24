@@ -1,10 +1,10 @@
 #ifndef VERTICE_H
 #define VERTICE_H
 
+#include <iostream>
 using namespace std;
 
 #define MAXIMO_ARESTAS 4 // maximo de arestas por vertice
-#define MAXIMO_FORCAS 2 // maximo de forcas por vertice
 
 class Vertice {
 public:
@@ -14,13 +14,13 @@ public:
 	int getNumeroDeArestrasDeSaida();
 	bool addForca(double intensidade, char direcao); // direcao pode ser 'i' ou 'j'
 	double* getForcas();
-	bool addIncognita(char direcao); // direcao pode ser 'i', 'j'
+	bool setIncognita(int booleana, char direcao); // direcao pode ser 'i', 'j'
 	int* getIncognitas();
 protected:
 	char nome;
 	Vertice* adjacentes[MAXIMO_ARESTAS];
 	int quantidade = 0;
-	double forcas[MAXIMO_FORCAS];
+	double forcas[2] = {0, 0}; // {Fx, Fy}
 	int incognitas[3] = {0, 0, 0}; // {Fx, Fy, Mz} // 1 se tiver incognita, 0 caso contrario
 };
 
