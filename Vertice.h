@@ -13,6 +13,7 @@ public:
 	char getNome();
 	int getNumeroDeArestrasDeSaida();
 	bool addForca(double intensidade, char direcao); // direcao pode ser 'i' ou 'j'
+	bool addIncognita(double intensidade, char direcao); // direcao pode ser 'i', 'j' ou 'k'
 protected:
 	char nome;
 	Vertice* adjacentes[MAXIMO_ARESTAS];
