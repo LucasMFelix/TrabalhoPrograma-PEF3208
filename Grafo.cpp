@@ -1,4 +1,5 @@
 #include "Grafo.h"
+#include <iostream>
 
 Grafo::Grafo()
 {
