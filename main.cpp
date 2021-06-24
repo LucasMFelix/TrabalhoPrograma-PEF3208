@@ -1,5 +1,5 @@
 #include <iostream>
-//AGORA SIMMMM
+
 #include "Grafo.h"
 
 using namespace std;
@@ -38,12 +38,7 @@ void addBarra(Grafo* estrutura) {
             }
 
             case 3: {
-                /*
-                float inclinacao;
-                cout << "Digite o angulo de inclinacao com o eixo x em graus (Utilize ponto): ";
-                cin >> inclinacao;
-                estrutura->adicionarAresta(nome, comprimento, inclinacao);
-                */
+                //
                 cout << "Recurso desabilitado. Tente novamente." << endl;
                 break;
             }
@@ -60,24 +55,39 @@ void addApoio(Grafo* estrutura) {
              << "0) Retornar;" << endl
              << "1) Articulacao Movel;" << endl
              << "2) Articulacao Fixa;" << endl
-             << "3) Engastamento;" << endl
+             << "3) Engastamento ;" << endl
              << "Digite o numero da opcao: ";
         cin >> opcao;
+
+        char nome;
+        cout << "Digite o nome do vertice: (ex.: A, E): ";
+        cin >> nome;
+
         switch (opcao) {
             case 0: break;
 
             case 1: {
-                //
+                if (Vertice* v = estrutura->getVertice(nome)) { // Se o vertice existir
+                    v->addIncognita('j');
+                }
                 break;
             }
 
             case 2: {
-                //
+                if (Vertice* v = estrutura->getVertice(nome)) { // Se o vertice existir
+                    v->addIncognita('i');
+                    v->addIncognita('j');
+                }
                 break;
             }
 
             case 3: {
-                //
+                if (Vertice* v = estrutura->getVertice(nome)) { // Se o vertice existir
+                    v->addIncognita('i');
+                    v->addIncognita('j');
+                    v->addIncognita('k');
+                }
+                cout << "Recurso desabilitado. Tente novamente." << endl;
                 break;
             }
 
@@ -156,6 +166,10 @@ void addCarga(Grafo* estrutura) {
 	}
 }
 
+void equilibrio (double &a, double &b, double &c) { // No maximo resolvera um sistema 3x3
+    //
+}
+
 void interface() {
 	cout << "PROGRAMA SOLUCIONADOR DE PROBLEMAS SIMPLES DE MECANICA DAS ESTRUTURAS" << endl << endl;
 	cout << "Software desenvolvido por Lucas Marques e Reinaldo Avelino durante a disciplina PEF3208." << endl;
@@ -163,6 +177,12 @@ void interface() {
 
 	Grafo* estrutura = new Grafo();
 	int opcao = -1;
+
+	// Incognitas do sistema 3x3
+	double a = 0;
+	double b = 0;
+	double c = 0;
+
 	while (opcao != 0) {
         cout << endl;
 		cout << "Menu de opcoes:" << endl
@@ -170,6 +190,8 @@ void interface() {
 		     << "1) Adicionar barra;" << endl
 		     << "2) Adicionar apoio;" << endl
 		     << "3) Adicionar carga;" << endl
+		     << "4) Obter reacoes de apoio" << endl
+		     << "5) Diagramas dos esforcos solicitantes" << endl
 		     << "Digite o numero da opcao: ";
 		cin >> opcao;
 
@@ -178,6 +200,15 @@ void interface() {
 			case 1: {addBarra(estrutura); break;}
 			case 2: {addApoio(estrutura); break;}
 			case 3: {addCarga(estrutura); break;}
+			case 4: {
+                equilibrio(a, b, c);
+                //
+                break;
+			}
+			case 5: {
+                //
+                break;
+			}
 			default: cout << "Numero invalido. Tente novamente." << endl;
 		}
 	}
