@@ -14,7 +14,7 @@ public:
 	int getNumeroDeArestrasDeSaida();
 	bool addForca(double intensidade, char direcao); // direcao pode ser 'i' ou 'j'
 	void getForcas();
-	bool addIncognita(double &intensidade, char direcao); // direcao pode ser 'i', 'j' ou 'k'
+	bool addIncognita(double intensidade, char direcao); // direcao pode ser 'i', 'j' ou 'k'
 	void getIncognitas();
 protected:
 	char nome;
