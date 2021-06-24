@@ -33,7 +33,7 @@ void Vertice::getForcas() {
     return this->forcas;
 }
 
-bool Vertice::addIncognita(double &intensidade, char direcao)
+bool Vertice::addIncognita(double intensidade, char direcao)
 {
     if (direcao == 'i') {this->incognitas[0] = intensidade; return true;}
     else if (direcao == 'j') {this->incognitas[1] = intensidade; return true;}
