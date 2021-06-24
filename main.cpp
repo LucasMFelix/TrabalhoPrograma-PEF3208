@@ -68,24 +68,24 @@ void addApoio(Grafo* estrutura) {
 
             case 1: {
                 if (Vertice* v = estrutura->getVertice(nome)) { // Se o vertice existir
-                    v->addIncognita('j');
+                    v->setIncognita(1, 'j');
                 }
                 break;
             }
 
             case 2: {
                 if (Vertice* v = estrutura->getVertice(nome)) { // Se o vertice existir
-                    v->addIncognita('i');
-                    v->addIncognita('j');
+                    v->setIncognita(1, 'i');
+                    v->setIncognita(1, 'j');
                 }
                 break;
             }
 
             case 3: {
                 if (Vertice* v = estrutura->getVertice(nome)) { // Se o vertice existir
-                    v->addIncognita('i');
-                    v->addIncognita('j');
-                    v->addIncognita('k');
+                    v->setIncognita(1, 'i');
+                    v->setIncognita(1, 'j');
+                    v->setIncognita(1, 'k');
                 }
                 cout << "Recurso desabilitado. Tente novamente." << endl;
                 break;
@@ -166,8 +166,37 @@ void addCarga(Grafo* estrutura) {
 	}
 }
 
-void equilibrio (double &a, double &b, double &c) { // No maximo resolvera um sistema 3x3
-    //
+void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
+                                   double &b, char &b_nome, char &b_direcao,
+                                   double &c, char &c_nome, char &c_direcao) {
+    Vertice* v;
+    // Fx = 0
+    double sumFx = 0;
+    for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
+        sumFx += estrutura->getVertices()[i]->getForcas()[0];
+    }
+    for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
+        v = estrutura->getVertices()[i];
+        if (v->getIncognitas()[0] == 1) { // Se tiver incognita em x
+            a = -sumFx; // a + sumFx = 0
+            a_nome = v->getNome();
+            a_direcao = 'i';
+            v->addForca(a, 'i'); // Adicionando o valor da incognita como forca
+            v->setIncognita(0, 'i'); // Tirando a incognita
+        }
+        break;
+    }
+
+    // Mz = 0
+    for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
+        Vertice* v = estrutura->getVertices()[i];
+        if (v->getIncognitas()[1] == 1) { // Se tiver incognita em y
+            // v sera o referencial do momento
+            
+        }
+    }
+    // Fy = 0
+
 }
 
 void interface() {
@@ -179,9 +208,9 @@ void interface() {
 	int opcao = -1;
 
 	// Incognitas do sistema 3x3
-	double a = 0;
-	double b = 0;
-	double c = 0;
+	double a = 0; char a_nome = 'o'; char a_direcao = 'o';
+	double b = 0; char b_nome = 'o'; char b_direcao = 'o';
+	double c = 0; char c_nome = 'o'; char c_direcao = 'o';
 
 	while (opcao != 0) {
         cout << endl;
@@ -201,7 +230,9 @@ void interface() {
 			case 2: {addApoio(estrutura); break;}
 			case 3: {addCarga(estrutura); break;}
 			case 4: {
-                equilibrio(a, b, c);
+                equilibrio(estrutura, a, a_nome, a_direcao,
+                                      b, b_nome, b_direcao,
+                                      c, c_nome, c_direcao);
                 //
                 break;
 			}
