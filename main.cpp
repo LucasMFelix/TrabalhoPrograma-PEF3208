@@ -87,7 +87,6 @@ void addApoio(Grafo* estrutura) {
                     v->setIncognita(1, 'j');
                     v->setIncognita(1, 'k');
                 }
-                cout << "Recurso desabilitado. Tente novamente." << endl;
                 break;
             }
 
