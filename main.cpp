@@ -1,6 +1,5 @@
 #include <iostream>
-//Hey now, Hey nowww, dont dream its overrr
-// Teste
+//AGORA SIMMMM
 #include "Grafo.h"
 
 using namespace std;
