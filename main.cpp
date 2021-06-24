@@ -55,7 +55,7 @@ void addApoio(Grafo* estrutura) {
              << "0) Retornar;" << endl
              << "1) Articulacao Movel;" << endl
              << "2) Articulacao Fixa;" << endl
-             << "3) Engastamento ;" << endl
+             << "3) Engastamento;" << endl
              << "Digite o numero da opcao: ";
         cin >> opcao;
 
