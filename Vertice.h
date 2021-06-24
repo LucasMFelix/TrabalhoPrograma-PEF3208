@@ -13,15 +13,15 @@ public:
 	char getNome();
 	int getNumeroDeArestrasDeSaida();
 	bool addForca(double intensidade, char direcao); // direcao pode ser 'i' ou 'j'
-	void getForcas();
-	bool addIncognita(double intensidade, char direcao); // direcao pode ser 'i', 'j' ou 'k'
-	void getIncognitas();
+	double* getForcas();
+	bool addIncognita(char direcao); // direcao pode ser 'i', 'j'
+	int* getIncognitas();
 protected:
 	char nome;
 	Vertice* adjacentes[MAXIMO_ARESTAS];
 	int quantidade = 0;
 	double forcas[MAXIMO_FORCAS];
-	double incognitas[3] = {0, 0, 0}; // {Fx, Fy, Mz}
+	int incognitas[3] = {0, 0, 0}; // {Fx, Fy, Mz} // 1 se tiver incognita, 0 caso contrario
 };
 
 #endif // VERTICE_H
