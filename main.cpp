@@ -188,7 +188,7 @@ void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
 
     // Mz = 0
     for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
-        Vertice* v = estrutura->getVertices()[i];
+        v = estrutura->getVertices()[i];
         if (v->getIncognitas()[1] == 1) { // Se tiver incognita em y
             // v sera o referencial do momento
             
