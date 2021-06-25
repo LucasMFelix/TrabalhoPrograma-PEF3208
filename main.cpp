@@ -187,10 +187,19 @@ void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
     }
 
     // Mz = 0
+    double distX = 0;//braço do torque
+    double fy2 = 0; //Segundo Fy
     for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
         v = estrutura->getVertices()[i];
         if (v->getIncognitas()[1] == 1) { // Se tiver incognita em y
             // v sera o referencial do momento
+		if (i < estrutura->getNumeroVertices() - 1){//Se todos os vertices não tiverem sido varridos
+			for (int j = i + 1; j < estrutura->getNumeroVertices(); j++){//Varrendo os vertices restantes em busca de outro vertice com incognita em y 
+				if (v->getIncognitas()[1] == 1){//Caso haja mais uma incognita y
+					//Parei aqui para tomar banho
+				}
+			}
+		}
             
         }
     }
