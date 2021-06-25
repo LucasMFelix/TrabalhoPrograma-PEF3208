@@ -165,6 +165,15 @@ void addCarga(Grafo* estrutura) {
 	}
 }
 
+char* encontrarCaminho(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){//Encontra um caminho entre dois vertices
+	Aresta** Arestas - estrutura->getArestas();
+	
+}
+int calcularDistanciaHorizontal(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){
+	Aresta** Arestas = estrutura->getArestas();
+	
+}
+
 void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
                                    double &b, char &b_nome, char &b_direcao,
                                    double &c, char &c_nome, char &c_direcao) {
