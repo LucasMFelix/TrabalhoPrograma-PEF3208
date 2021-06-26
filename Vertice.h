@@ -2,6 +2,7 @@
 #define VERTICE_H
 #include "Aresta.h"
 #include <iostream>
+#include <string>
 using namespace std;
 class Aresta;
 
