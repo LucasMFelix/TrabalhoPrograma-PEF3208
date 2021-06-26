@@ -27,6 +27,17 @@ bool Grafo::adicionarVertice(char nome) {
 
 bool Grafo::adicionarAresta(char* nome, float comprimento, float inclinacao) {
     if(numeroArestas == MAXIMO_ARESTAS) return false;
+    for (int i = 0; i < numeroVertices; i++){
+        if(nome[0] == this->getVertices()[i]->getNome()){
+            this->getVertices()[i]->adicionarAresta(nome);
+        }
+    }
+
+    for (int i = 0; i < numeroVertices; i++){
+        if(nome[1] == this->getVertices()[i]->getNome()){
+            this->getVertices()[i]->adicionarAresta(nome);
+        }
+    }
 
     arestas[numeroArestas++] = new Aresta(nome, comprimento, inclinacao);
     return true;
