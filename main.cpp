@@ -166,11 +166,17 @@ void addCarga(Grafo* estrutura) {
 }
 
 char** encontrarCaminho(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){//Encontra um caminho entre dois vertices
-    char** arestasJaVarridas = NULL;
+    Aresta** arestasAdjacentes = primeiroVertice->getArestas();
     char** caminho = NULL;
     bool passador = true;
-    while(passador){}
+    while(passador){
+        if (primeiroVertice->getNumeroDeArestras() == 0){
+            return NULL;
+        } else if ((primeiroVertice->getNumeroDeArestras() == 1) && (primeiroVertice->getArestas()[0]->getPrimeiroVertice()->getNome() /*Teste*/)){
 
+        }
+    }
+    return caminho;
 }
 int calcularDistanciaHorizontal(char* caminho){
 
