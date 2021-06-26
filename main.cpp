@@ -165,13 +165,15 @@ void addCarga(Grafo* estrutura) {
 	}
 }
 
-char* encontrarCaminho(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){//Encontra um caminho entre dois vertices
-	Aresta** Arestas - estrutura->getArestas();
-	
+char** encontrarCaminho(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){//Encontra um caminho entre dois vertices
+    char** arestasJaVarridas = NULL;
+    char** caminho = NULL;
+    bool passador = true;
+    while(passador){}
+
 }
-int calcularDistanciaHorizontal(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){
-	Aresta** Arestas = estrutura->getArestas();
-	
+int calcularDistanciaHorizontal(char* caminho){
+
 }
 
 void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
@@ -203,13 +205,13 @@ void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
         if (v->getIncognitas()[1] == 1) { // Se tiver incognita em y
             // v sera o referencial do momento
 		if (i < estrutura->getNumeroVertices() - 1){//Se todos os vertices não tiverem sido varridos
-			for (int j = i + 1; j < estrutura->getNumeroVertices(); j++){//Varrendo os vertices restantes em busca de outro vertice com incognita em y 
+			for (int j = i + 1; j < estrutura->getNumeroVertices(); j++){//Varrendo os vertices restantes em busca de outro vertice com incognita em y
 				if (v->getIncognitas()[1] == 1){//Caso haja mais uma incognita y
 					//Parei aqui para tomar banho
 				}
 			}
 		}
-            
+
         }
     }
     // Fy = 0
