@@ -44,3 +44,34 @@ bool Vertice::setIncognita(int booleana, char direcao)
 int* Vertice::getIncognitas() {
     return this->incognitas;
 }
+
+char** Vertice::getArestas()
+{
+    return arestasPertencentes;
+}
+
+bool Vertice::adicionarAresta(char* nomeAresta)
+{
+    bool retorno = false;
+    if (quantidadeDeArestas < MAXIMO_ARESTAS){
+        arestasPertencentes[quantidadeDeArestas] = nomeAresta;
+        quantidadeDeArestas++;
+        retorno = true;
+    }
+    return retorno;
+}
+
+bool Vertice::setCor(string novaCor)
+{
+    bool retorno = false;
+    if ((novaCor == "BRANCO" || novaCor == "CINZA" || novaCor == "PRETO") && novaCor != cor){
+        cor = novaCor;
+        retorno = true;
+    }
+    return retorno;
+}
+
+string Vertice::getCor()
+{
+    return cor;
+}
