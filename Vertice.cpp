@@ -12,8 +12,8 @@ char Vertice::getNome() {
     return this->nome;
 }
 
-int Vertice::getNumeroDeArestrasDeSaida() {
-    return quantidade;
+int Vertice::getNumeroDeArestras() {
+    return quantidadeDeArestas;
 }
 
 bool Vertice::addForca(double intensidade, char direcao)
@@ -45,16 +45,16 @@ int* Vertice::getIncognitas() {
     return this->incognitas;
 }
 
-char** Vertice::getArestas()
+Aresta** Vertice::getArestas()
 {
     return arestasPertencentes;
 }
 
-bool Vertice::adicionarAresta(char* nomeAresta)
+bool Vertice::adicionarAresta(Aresta* aresta)
 {
     bool retorno = false;
     if (quantidadeDeArestas < MAXIMO_ARESTAS){
-        arestasPertencentes[quantidadeDeArestas] = nomeAresta;
+        arestasPertencentes[quantidadeDeArestas] = aresta;
         quantidadeDeArestas++;
         retorno = true;
     }
