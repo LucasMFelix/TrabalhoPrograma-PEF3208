@@ -2,7 +2,7 @@
 #define GRAFO_H
 
 #define MAXIMO_VERTICES 20
-#define MAXIMO_ARESTAS 20
+#define MAXIMO_ARESTAS_ESTRUTURA 20
 
 #include "Vertice.h"
 #include "Aresta.h"
@@ -24,7 +24,7 @@ protected:
     int numeroVertices = 0;
     Vertice* vertices[MAXIMO_VERTICES];
     int numeroArestas = 0;
-    Aresta* arestas[MAXIMO_ARESTAS];
+    Aresta* arestas[MAXIMO_ARESTAS_ESTRUTURA];
 };
 
 #endif // GRAFO_H
