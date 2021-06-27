@@ -23,9 +23,9 @@ public:
 	bool setCor(string novaCor);
 	string getCor();
 protected:
-    string cor = "BRANCO"; //Pode ser branco, preto ou cinza
+    string cor = "BRANCO"; // Pode ser branco, preto ou cinza
 	char nome;
-	Aresta* arestasPertencentes[MAXIMO_ARESTAS];//Guarda as arestas que o vertice pertence
+	Aresta* arestasPertencentes[MAXIMO_ARESTAS]; // Guarda as arestas que o vertice pertence
 	int quantidadeDeArestas = 0;
 	double forcas[2] = {0, 0}; // {Fx, Fy}
 	int incognitas[3] = {0, 0, 0}; // {Fx, Fy, Mz} // 1 se tiver incognita, 0 caso contrario
