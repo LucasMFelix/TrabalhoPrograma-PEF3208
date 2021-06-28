@@ -16,24 +16,54 @@ void addBarra(Grafo* estrutura) {
         cin >> opcao;
 
         char nome[2];
-        float comprimento;
+        double comprimento;
         cout << "Digite o nome da barra (ex.: AB, CD): ";
         cin >> nome;
         cout << "Digite o comprimento da barra em metros (Utilize ponto): ";
         cin >> comprimento;
-        estrutura->adicionarVertice(nome[0]);
-        estrutura->adicionarVertice(nome[1]);
 
+        if (estrutura->getNumeroVertices() == 0) { // Caso seja a primeira barra
+            estrutura->adicionarVertice(nome[0]);
+            estrutura->getVertice(nome[0])->setCoordenadas(0, 0);
+        }
+
+        double x0, y0;
         switch (opcao) {
             case 0: break;
 
-            case 1: {
+            case 1: { // Barra horizontal
                 estrutura->adicionarAresta(nome, comprimento, 0);
+
+                if (estrutura->adicionarVertice(nome[0])) { // Barra esta para a esquerda
+                    x0 = estrutura->getVertice(nome[1])->getCoordenadas()[0];
+                    y0 = estrutura->getVertice(nome[1])->getCoordenadas()[1];
+                    estrutura->getVertice(nome[0])->setCoordenadas(x0-comprimento, y0);
+                }
+                else if (estrutura->adicionarVertice(nome[1])) { // Barra esta para a direita
+                    x0 = estrutura->getVertice(nome[0])->getCoordenadas()[0];
+                    y0 = estrutura->getVertice(nome[0])->getCoordenadas()[1];
+                    estrutura->getVertice(nome[1])->setCoordenadas(x0+comprimento, y0);
+                }
+                else return; // Barra isolada
+
                 break;
             }
 
-            case 2: {
+            case 2: { // Barra vertical
                 estrutura->adicionarAresta(nome, comprimento, 90);
+
+                if (estrutura->adicionarVertice(nome[0])) { // Barra esta para baixo
+                    x0 = estrutura->getVertice(nome[1])->getCoordenadas()[0];
+                    y0 = estrutura->getVertice(nome[1])->getCoordenadas()[1];
+                    estrutura->getVertice(nome[0])->setCoordenadas(x0, y0-comprimento);
+                }
+                else if (estrutura->adicionarVertice(nome[1])) { // Barra esta para cima
+                    x0 = estrutura->getVertice(nome[0])->getCoordenadas()[0];
+                    y0 = estrutura->getVertice(nome[0])->getCoordenadas()[1];
+                    estrutura->getVertice(nome[1])->setCoordenadas(x0, y0+comprimento);
+                }
+                else return; // Barra isolada
+
                 break;
             }
 
@@ -114,14 +144,14 @@ void addCarga(Grafo* estrutura) {
                 char direcao;
                 cout << "Vertice (ponto) de acao da forca: ";
                 cin >> nome;
-                if (Vertice* v = estrutura->getVertice(nome)) { // Caso haja um vertice com tal nome
-                    cout << "Direcao (i ou j): ";
-                    cin >> direcao;
-                    cout << "Intensidade (em kN): ";
-                    cin >> intensidade;
-                    v->addForca(intensidade, direcao);
-                }
-                else cout << "Vertice inexistente. Tente novamente." << endl;
+
+                Vertice* v = estrutura->getVertice(nome);
+                cout << "Direcao (i ou j): ";
+                cin >> direcao;
+                cout << "Intensidade (em kN): ";
+                cin >> intensidade;
+                v->addForca(intensidade, direcao);
+
                 break;
             }
 
@@ -165,23 +195,6 @@ void addCarga(Grafo* estrutura) {
 	}
 }
 
-char** encontrarCaminho(Vertice* primeiroVertice, Vertice* segundoVertice, Grafo* estrutura){//Encontra um caminho entre dois vertices
-    Aresta** arestasAdjacentes = primeiroVertice->getArestas();
-    char** caminho = NULL;
-    bool passador = true;
-    while(passador){
-        if (primeiroVertice->getNumeroDeArestras() == 0){
-            return NULL;
-        } else if ((primeiroVertice->getNumeroDeArestras() == 1) && (primeiroVertice->getArestas()[0]->getPrimeiroVertice()->getNome() /*Teste*/)){
-
-        }
-    }
-    return caminho;
-}
-int calcularDistanciaHorizontal(char* caminho){
-
-}
-
 void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
                                    double &b, char &b_nome, char &b_direcao,
                                    double &c, char &c_nome, char &c_direcao) {
@@ -199,28 +212,54 @@ void equilibrio (Grafo* estrutura, double &a, char &a_nome, char &a_direcao,
             a_direcao = 'i';
             v->addForca(a, 'i'); // Adicionando o valor da incognita como forca
             v->setIncognita(0, 'i'); // Tirando a incognita
+            break;
         }
-        break;
     }
 
     // Mz = 0
-    double distX = 0; // braço do torque
-    double fy2 = 0; // Segundo Fy
+    Vertice* u;
+    double sumMz = 0;
     for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
         v = estrutura->getVertices()[i];
         if (v->getIncognitas()[1] == 1) { // Se tiver incognita em y
-            // v sera o referencial do momento
-		if (i < estrutura->getNumeroVertices() - 1){ // Se todos os vertices não tiverem sido varridos
-			for (int j = i + 1; j < estrutura->getNumeroVertices(); j++){ // Varrendo os vertices restantes em busca de outro vertice com incognita em y
-				if (v->getIncognitas()[1] == 1){ // Caso haja mais uma incognita y
-					//
-				}
-			}
-		}
-
+            break; // v sera o referencial do momento
         }
     }
+
+    for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
+        u = estrutura->getVertices()[i];
+        if (u->getForcas()[0] != 0) { // Se tiver forca em x
+            sumMz +=  - estrutura->distanciaVertical(v, u) * u->getForcas()[0]; // Convencao de Grinter
+        }
+        if (u->getForcas()[1] != 0) { // Se tiver forca em y
+            sumMz += estrutura->distanciaHorizontal(v, u) * u->getForcas()[1]; // Convencao de Grinter
+        }
+    }
+
+    double braco;
+    for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
+        u = estrutura->getVertices()[i];
+        if (u->getIncognitas()[1] == 1) { // Se tiver incognita em y
+            // u sera o vertice no qual descobriremos a incognita
+            braco = estrutura->distanciaHorizontal(v, u);
+            b = -sumMz/braco;
+            b_nome = u->getNome();
+            b_direcao = 'j';
+            u->addForca(b, 'j'); // Adicionando o valor da incognita como forca
+            u->setIncognita(0, 'j'); // Tirando a incognita
+            break;
+        }
+    }
+
     // Fy = 0
+    double sumFy = 0;
+    // Descobriremos a incognita em y de v, nosso referencial do momento
+    for (int i = 0; i < estrutura->getNumeroVertices(); i++) {
+        sumFy += estrutura->getVertices()[i]->getForcas()[1];
+    }
+    c = -sumFy; // c + sumFy = 0
+    c_nome = v->getNome();
+    c_direcao = 'j';
 
 }
 
@@ -258,7 +297,25 @@ void interface() {
                 equilibrio(estrutura, a, a_nome, a_direcao,
                                       b, b_nome, b_direcao,
                                       c, c_nome, c_direcao);
-                //
+                cout << "Reacoes de apoio: " << endl;
+                if (a_direcao == 'i') {
+                    cout << "Horizontal em " << a_nome << " : " << a << " i kN" << endl;
+                }
+                else if (a_direcao == 'j') {
+                    cout << "Vertical em " << a_nome << " : " << a << " j kN" << endl;
+                }
+                if (b_direcao == 'i') {
+                    cout << "Horizontal em " << b_nome << " : " << b << " i kN" << endl;
+                }
+                else if (b_direcao == 'j') {
+                    cout << "Vertical em " << b_nome << " : " << b << " j kN" << endl;
+                }
+                if (c_direcao == 'i') {
+                    cout << "Horizontal em " << c_nome << " : " << c << " i kN" << endl;
+                }
+                else if (c_direcao == 'j') {
+                    cout << "Vertical em " << c_nome << " : " << c << " j kN" << endl;
+                }
                 break;
 			}
 			case 5: {
