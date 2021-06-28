@@ -13,7 +13,6 @@ public:
 	virtual ~Grafo();
 	bool adicionarVertice(char nome);
 	bool adicionarAresta(char* nome, float comprimento, float inclinacao);
-	Vertice* get(char nome);
 	int getNumeroVertices();
 	Vertice** getVertices();
 	int getNumeroArestas();
