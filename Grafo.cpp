@@ -1,4 +1,4 @@
-#include "Grafo.h"
+ #include "Grafo.h"
 #include <iostream>
 
 Grafo::Grafo()
@@ -8,11 +8,11 @@ Grafo::Grafo()
 
 Grafo::~Grafo()
 {
-    for (int i = 0; i < numeroVertices; i++) {
-        delete vertices[i];
-    }
     for (int i = 0; i < numeroArestas; i++) {
         delete arestas[i];
+    }
+    for (int i = 0; i < numeroVertices; i++) {
+        delete vertices[i];
     }
 }
 
@@ -27,34 +27,9 @@ bool Grafo::adicionarVertice(char nome) {
 
 bool Grafo::adicionarAresta(char* nome, float comprimento, float inclinacao) {
     if(numeroArestas == MAXIMO_ARESTAS) return false;
-    Vertice* v1 = NULL;
-    Vertice* v2 = NULL;
-    for (int i = 0; i < numeroVertices; i++){
-        if(nome[0] == this->getVertices()[i]->getNome()){
-            this->getVertices()[i]->adicionarAresta(new Aresta(nome, comprimento, inclinacao, v1, v2));
-            v1 = this->getVertices()[i];
-        }
-    }
 
-    for (int i = 0; i < numeroVertices; i++){
-        if(nome[1] == this->getVertices()[i]->getNome()){
-            this->getVertices()[i]->adicionarAresta(new Aresta(nome, comprimento, inclinacao, v1, v2));
-            v2 = this->getVertices()[i];
-        }
-    }
-    if (v1 == NULL || v2 == NULL) return false;
-
-    arestas[numeroArestas++] = new Aresta(nome, comprimento, inclinacao, v1, v2);
+    arestas[numeroArestas++] = new Aresta(nome, comprimento, inclinacao);
     return true;
-}
-
-Vertice* Grafo::get(char nome) {
-    for (int i = 0; i < numeroVertices; i++) {
-        if (vertices[i]->getNome() == nome) {
-            return vertices[i];
-        }
-    }
-    return NULL;
 }
 
 int Grafo::getNumeroVertices()
@@ -91,4 +66,18 @@ Aresta* Grafo::getAresta(char* nome)
         if (arestas[i]->getNome() == nome) return arestas[i];
     }
     return NULL;
+}
+
+double Grafo::distanciaHorizontal(Vertice* v1, Vertice* v2)
+{
+    double x1 = v1->getCoordenadas()[0];
+    double x2 = v2->getCoordenadas()[0];
+    return (x2 - x1);
+}
+
+double Grafo::distanciaVertical(Vertice* v1, Vertice* v2)
+{
+    double y1 = v1->getCoordenadas()[1];
+    double y2 = v2->getCoordenadas()[1];
+    return (y2 - y1);
 }
