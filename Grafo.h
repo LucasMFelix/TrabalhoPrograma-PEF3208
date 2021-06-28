@@ -1,3 +1,6 @@
+#ifndef GRAFO_H
+#define GRAFO_H
+
 #define MAXIMO_VERTICES 20
 #define MAXIMO_ARESTAS 20
 
