@@ -1,6 +1,6 @@
 #include "Aresta.h"
 
-Aresta::Aresta(char* nome, float comprimento, float inclinacao, Vertice* primeiroVertice, Vertice* segundoVertice)
+Aresta::Aresta(char* nome, float comprimento, float inclinacao)
 {
     this->nome = nome;
     this->comprimento = comprimento;
