@@ -145,12 +145,14 @@ void addCarga(Grafo* estrutura) {
                 cout << "Vertice (ponto) de acao da forca: ";
                 cin >> nome;
 
-                Vertice* v = estrutura->getVertice(nome);
-                cout << "Direcao (i ou j): ";
-                cin >> direcao;
-                cout << "Intensidade (em kN): ";
-                cin >> intensidade;
-                v->addForca(intensidade, direcao);
+                if (Vertice* v = estrutura->getVertice(nome)) { // Caso o vertice exista
+                    cout << "Direcao (i ou j): ";
+                    cin >> direcao;
+                    cout << "Intensidade (em kN): ";
+                    cin >> intensidade;
+                    v->addForca(intensidade, direcao);
+                }
+                else cout << "Vertice inexistente. Tente novamente." << endl;
 
                 break;
             }
