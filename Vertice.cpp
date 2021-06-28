@@ -12,8 +12,8 @@ char Vertice::getNome() {
     return this->nome;
 }
 
-int Vertice::getNumeroDeArestras() {
-    return quantidadeDeArestas;
+int Vertice::getNumeroDeArestrasDeSaida() {
+    return quantidade;
 }
 
 bool Vertice::addForca(double intensidade, char direcao)
@@ -45,33 +45,13 @@ int* Vertice::getIncognitas() {
     return this->incognitas;
 }
 
-Aresta** Vertice::getArestas()
+void Vertice::setCoordenadas(double x0, double y0)
 {
-    return arestasPertencentes;
+    this->coordenadas[0] = x0;
+    this->coordenadas[1] = y0;
 }
 
-bool Vertice::adicionarAresta(Aresta* aresta)
+double* Vertice::getCoordenadas()
 {
-    bool retorno = false;
-    if (quantidadeDeArestas < MAXIMO_ARESTAS){
-        arestasPertencentes[quantidadeDeArestas] = aresta;
-        quantidadeDeArestas++;
-        retorno = true;
-    }
-    return retorno;
-}
-
-bool Vertice::setCor(string novaCor)
-{
-    bool retorno = false;
-    if ((novaCor == "BRANCO" || novaCor == "CINZA" || novaCor == "PRETO") && novaCor != cor){
-        cor = novaCor;
-        retorno = true;
-    }
-    return retorno;
-}
-
-string Vertice::getCor()
-{
-    return cor;
+    return this->coordenadas;
 }
